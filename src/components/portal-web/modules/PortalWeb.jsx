@@ -1,6 +1,6 @@
 
 export function PortalWeb(){
     return(<>
-    <p>Hola world</p>
+    <p>Hola world desde victor</p>
     </>)
 }
