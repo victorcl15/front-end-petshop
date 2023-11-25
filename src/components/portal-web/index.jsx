@@ -1,9 +1,9 @@
 import React from "react";
-import { PortalWeb } from "./modules/PortalWeb";
+import { PortalWebController } from "./controllers/PortalWebController";
 
 
 export default function Portal(){
     return(
-    <PortalWeb></PortalWeb>
+    <PortalWebController></PortalWebController>
 )
 }
