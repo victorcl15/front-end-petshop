@@ -23,6 +23,7 @@ import {
 } from "react-router-dom";
 import Portal from "../../portal-web";
 import InfoProductoIndex from "../../info-producto";
+import GestionProductoIndex from "../../gestion-productos";
 
 export function NavBar({
   handleOpenNavMenu,
@@ -212,6 +213,8 @@ export function NavBar({
       <Route path="/" element={<Navigate to="/home" />} />
         <Route path="/home" element={<Portal />} />
         <Route path="/producto" element={<InfoProductoIndex />} />
+        <Route path="/gestion_producto" element={<GestionProductoIndex />} />
+
       </Routes>
     </>
   );
