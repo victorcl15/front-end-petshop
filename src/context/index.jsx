@@ -48,6 +48,7 @@ export const LoginProvider = ({ children }) => {
   const [usuario, setUsuario] = useState(initialLogin);
 
   const login = (newUsuario) => {
+    console.log(newUsuario)
     setUsuario(newUsuario);
     localStorage.setItem("usuario", newUsuario);
   };

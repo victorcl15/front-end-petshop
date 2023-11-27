@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
 import { PortalWeb } from "../modules/PortalWeb";
 import { getProductos } from "../services/PortalWebService";
-import { useProducto } from "../../../context";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useLogin, useProducto } from "../../../context";
+import { useNavigate } from "react-router-dom";
 
 export function PortalWebController() {
     const Navigate = useNavigate();
   const [productos, setProductos] = useState([]);
   const { producto, productoElegido, limpiarProducto } = useProducto();
+  const { usuario, login, logout } = useLogin(); 
   const requestProductos = async () => {
 
     const arrayProductos = await getProductos();
@@ -37,6 +38,7 @@ console.log(data);
   }
   useEffect(() => {
     requestProductos();
+    console.log(usuario);
   }, []);
   return (
     <>

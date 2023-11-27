@@ -10,8 +10,10 @@ import {
 import { ModalEditarProducto } from "../modules/ModalEditarProducto";
 import { ModalCrearProducto } from "../modules/ModalCrearProducto";
 import { ModalEliminarProducto } from "../modules/ModalEliminarProducto";
+import { useLogin } from "../../../context";
 
 export function GestionProductoController() {
+    const { usuario, login, logout } = useLogin()
   const [productosUsuario, setProductosUsuario] = useState([]);
   const [tiposCategorias, setTiposCategorias] = useState([]);
   const [openEdit, setOpenEdit] = useState(false);
@@ -67,7 +69,7 @@ export function GestionProductoController() {
       precio: "",
       stock: "",
       categoria: "",
-      usuario: "65610514c7eec25d1317ea47",
+      usuario: usuario._id,
       img: "",
       descripcion: "",
     };
@@ -114,7 +116,7 @@ export function GestionProductoController() {
     e.preventDefault();
     console.log(`ID: ${infoDelete.id}`);
     requestEliminarProducto(infoDelete.id);
-    requestProductosPorUsuario("65610514c7eec25d1317ea47");
+    requestProductosPorUsuario(usuario._id);
     handleCloseDelete();
   };
   const getFieldValueEdit = (fieldName) => {
@@ -144,7 +146,7 @@ export function GestionProductoController() {
     const { id } = editedData;
     console.log("Formulario enviado:", editedData);
     await requestEditarProducto(id, editedData);
-    await requestProductosPorUsuario("65610514c7eec25d1317ea47");
+    await requestProductosPorUsuario(usuario._id);
     handleCloseEdit();
   };
   const handleSubmitNew = async (e) => {
@@ -152,12 +154,13 @@ export function GestionProductoController() {
 
     console.log("Formulario enviado:", newData);
     await requestCrearProducto(newData);
-    await requestProductosPorUsuario("65610514c7eec25d1317ea47");
+    await requestProductosPorUsuario(usuario._id);
     handleCloseNew();
   };
 
   useEffect(() => {
-    requestProductosPorUsuario("65610514c7eec25d1317ea47");
+    requestProductosPorUsuario(usuario._id);
+    console.log(usuario);
   }, []);
   useEffect(() => {
     // Comprueba si algún campo ha cambiado desde los valores iniciales

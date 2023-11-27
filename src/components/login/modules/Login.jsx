@@ -39,7 +39,7 @@ const useStyles = () => {
   };
 };
 
-const Login = () => {
+const Login = ({handleIrHome}) => {
 
   const { usuario, login, logout } = useLogin(); 
   const classes = useStyles();
@@ -63,9 +63,10 @@ const Login = () => {
 
     console.log(user_response);
     login(user_response.data)
+    console.log(user_response);
     
-    if(usuario){
-        console.log(usuario)
+    if(usuario && usuario!=="" && usuario!== undefined && user_response.success!==false){
+        handleIrHome();
     }
     
   };

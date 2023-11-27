@@ -1,19 +1,23 @@
 import * as React from 'react';
 import "./App.css";
 import NavBarIndex from './components/navbar';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import { LoginController } from './components/login/controllers/LoginController';
 import Portal from "./components/portal-web"
 import InfoProductoIndex from "./components/info-producto"
+import GestionProductoIndex from './components/gestion-productos';
 
 function App() {
   
   return (
     <>
-    <Routes>
-        <Route element={<LoginController />} path='/' />
+      <Routes>
+      <Route path="/" element={<Navigate to="/login" />} />
+      <Route path="/login" element={<LoginController />} />
         <Route path="/home" element={<Portal />} />
         <Route path="/producto" element={<InfoProductoIndex />} />
+        <Route path="/gestion_producto" element={<GestionProductoIndex />} />
+
       </Routes>
     </>
   );

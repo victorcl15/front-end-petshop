@@ -15,12 +15,7 @@ import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
 import { Search } from "@mui/icons-material";
 import { styled, alpha } from "@mui/material/styles";
-import {
-  Routes,
-  Route,
-  Navigate,
-  useLocation,
-} from "react-router-dom";
+import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import Portal from "../../portal-web";
 import InfoProductoIndex from "../../info-producto";
 import GestionProductoIndex from "../../gestion-productos";
@@ -36,6 +31,7 @@ export function NavBar({
   handleCloseUserMenu,
   pages,
   settings,
+  handleIrGestionProducto,
 }) {
   const Search = styled("div")(({ theme }) => ({
     position: "relative",
@@ -130,7 +126,9 @@ export function NavBar({
                 }}
               >
                 {pages.map((page) => (
-                  <MenuItem key={page} onClick={handleCloseNavMenu}>
+                  
+                  <MenuItem data-name={page} key={page} onClick={handleCloseNavMenu}>
+                    
                     <Typography textAlign="center">{page}</Typography>
                   </MenuItem>
                 ))}
@@ -157,13 +155,16 @@ export function NavBar({
             </Typography>
             <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
               {pages.map((page) => (
-                <Button
-                  key={page}
-                  onClick={handleCloseNavMenu}
-                  sx={{ my: 2, color: "white", display: "block" }}
-                >
-                  {page}
-                </Button>
+                <a key={page} onClick={handleIrGestionProducto}>
+                  <Button
+                    key={page}
+                    onClick={handleCloseNavMenu}
+                    data-name={page}
+                    sx={{ my: 2, color: "white", display: "block" }}
+                  >
+                    {page}
+                  </Button>
+                </a>
               ))}
             </Box>
 
@@ -211,13 +212,6 @@ export function NavBar({
           </Search>
         </Container>
       </AppBar>
-      <Routes>
-      <Route path="/" element={<Navigate to="/home" />} />
-        <Route path="/home" element={<Portal />} />
-        <Route path="/producto" element={<InfoProductoIndex />} />
-        <Route path="/gestion_producto" element={<GestionProductoIndex />} />
-
-      </Routes>
     </>
   );
 }
