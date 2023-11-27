@@ -15,6 +15,7 @@ export const useProducto = () => {
 };
 
 export const ProductoProvider = ({ children }) => {
+
   const initialProducto = useMemo(() => localStorage.getItem("producto") || "", []);
   //const [token, setToken] = useState(initialToken);
   const [producto, setProducto] = useState(initialProducto);

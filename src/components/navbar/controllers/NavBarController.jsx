@@ -24,14 +24,14 @@ export function NavBarController() {
   return (
     <>
       <NavBar
-      pages={pages}
-      settings={settings}
-      anchorElNav={anchorElNav}
-      anchorElUser={anchorElUser}
-      handleOpenNavMenu={handleOpenNavMenu}
-      handleOpenUserMenu={handleOpenUserMenu}
-      handleCloseNavMenu={handleCloseNavMenu}
-      handleCloseUserMenu={handleCloseUserMenu}
+        pages={pages}
+        settings={settings}
+        anchorElNav={anchorElNav}
+        anchorElUser={anchorElUser}
+        handleOpenNavMenu={handleOpenNavMenu}
+        handleOpenUserMenu={handleOpenUserMenu}
+        handleCloseNavMenu={handleCloseNavMenu}
+        handleCloseUserMenu={handleCloseUserMenu}
       ></NavBar>
     </>
   );
