@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { PortalWeb } from "../modules/PortalWeb";
-import { getProductos } from "../services/PortalWebService";
+import { getProductos } from "../services/portalWebService";
 import { useLogin, useProducto } from "../../../context";
 import { useNavigate } from "react-router-dom";
 
