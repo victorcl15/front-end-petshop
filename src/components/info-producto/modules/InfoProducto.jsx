@@ -13,13 +13,19 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShareIcon from "@mui/icons-material/Share";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
-import { Box, Slide, Slider } from "@mui/material";
+import AddIcon from '@mui/icons-material/Add';
+import RemoveIcon from '@mui/icons-material/Remove';
+import { Box, Button, Slide, Slider } from "@mui/material";
 import Grid from "@mui/material/Grid";
 export function InfoProducto({
   expanded,
   handleExpandClick,
   producto,
   infoProducto,
+  cantidad,
+  handleIncrement,
+  handleDecrement,
+  handleOpenConfirmacion
 }) {
   const ExpandMore = styled((props) => {
     const { expand, ...other } = props;
@@ -121,7 +127,24 @@ export function InfoProducto({
                 Comprar Producto
               </Typography>
 
+              <Typography variant="h5" gutterBottom>
+                Stock Disponible: {infoProducto.stock}
+              </Typography>
+
+              <IconButton onClick={handleIncrement} aria-label="Incrementar cantidad">
+              <AddIcon />
+              </IconButton>
+
+              <label htmlFor="">{cantidad}</label>
               
+              <IconButton onClick={handleDecrement} aria-label="Decrementar cantidad">
+              <RemoveIcon />
+              </IconButton>
+              <br />
+              <Button data-direccion = {infoProducto.usuario.direccion} onClick={handleOpenConfirmacion} variant="contained" color="success">
+                COMPRAR
+              </Button>
+
             </>
           ) : (
             ""
