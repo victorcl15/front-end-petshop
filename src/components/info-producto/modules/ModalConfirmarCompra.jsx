@@ -11,7 +11,7 @@ import {
 
 export function ModalConfirmarCompra({
     open,
-    handleClose,
+    handleCloseConfirmacion,
     handleSubmit,
     handleChangeDireccion,
     direccion,
@@ -42,7 +42,7 @@ export function ModalConfirmarCompra({
         <>
             <Modal
                 open={open}
-                onClose={handleClose}
+                onClose={handleCloseConfirmacion}
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
             >
@@ -92,7 +92,7 @@ export function ModalConfirmarCompra({
                             m={-0.5}
                             mb={-2}
                         >
-                            <Button color="error" onClick={handleClose}>
+                            <Button color="error" onClick={handleCloseConfirmacion}>
                                 Cancelar
                             </Button>
                             <Button

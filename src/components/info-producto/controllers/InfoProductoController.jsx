@@ -83,6 +83,8 @@ export function InfoProductoController() {
     
     const requestStockActualizada = async (id, stock) => {
       const result = await UpdateStock(id, stock);
+      //console.log(result);
+      setInfoProducto(result);
     } 
 
     const handleIncrement = () => {

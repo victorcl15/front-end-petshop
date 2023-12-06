@@ -1,14 +1,27 @@
 import { useState } from "react";
 import { NavBar } from "../modules/NavBar";
 import { useNavigate } from "react-router-dom";
+import { useLogin } from "../../../context";
 
 export function NavBarController() {
   const Navigate = useNavigate();
-  const pages = ["Home", "Vendedor", "Portal"];
-  const settings = ["Profile", "Account", "Dashboard", "Logout"];
+  const { usuario, login, logout } = useLogin(); 
+  const pages = ["Inicio", "Vendedor"];
+  const settings = ["Cuenta", "Cerrar Sesión"];
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
+  const [open, setOpen] = useState(false);
 
+  const handleClick = () => {
+    setOpen(true);
+  };
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
+  };
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
@@ -19,14 +32,27 @@ export function NavBarController() {
 
   const handleCloseNavMenu = (e) => {
     setAnchorElNav(null);
-    console.log("hola")
     const {dataset} = e.currentTarget;
     console.log(dataset.name)
-    if(dataset.name === "Vendedor")
-    Navigate("/gestion_producto");
+    if(dataset.name === "Vendedor"){
+      if(usuario.esVendedor !== false){
+        Navigate("/gestion_producto");
+      } else {
+      handleClick();
+    }
+  }
+    if(dataset.name === "Inicio"){
+      Navigate("/home");
+    }
+    
   };
 
-  const handleCloseUserMenu = () => {
+  const handleCloseUserMenu = (e) => {
+    const {dataset} = e.currentTarget;
+    if(dataset.namesetting === "Cerrar Sesión"){
+      logout();
+      Navigate("/login");
+    }
     setAnchorElUser(null);
   };
   const handleIrGestionProducto = (e) => {
@@ -46,6 +72,8 @@ export function NavBarController() {
         handleCloseNavMenu={handleCloseNavMenu}
         handleCloseUserMenu={handleCloseUserMenu}
         handleIrGestionProducto={handleIrGestionProducto}
+        open={open}
+        handleClose={handleClose}
       ></NavBar>
     </>
   );

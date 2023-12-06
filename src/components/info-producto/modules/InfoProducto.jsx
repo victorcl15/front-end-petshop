@@ -13,8 +13,8 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShareIcon from "@mui/icons-material/Share";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
-import AddIcon from '@mui/icons-material/Add';
-import RemoveIcon from '@mui/icons-material/Remove';
+import AddIcon from "@mui/icons-material/Add";
+import RemoveIcon from "@mui/icons-material/Remove";
 import { Box, Button, Slide, Slider } from "@mui/material";
 import Grid from "@mui/material/Grid";
 export function InfoProducto({
@@ -25,7 +25,7 @@ export function InfoProducto({
   cantidad,
   handleIncrement,
   handleDecrement,
-  handleOpenConfirmacion
+  handleOpenConfirmacion,
 }) {
   const ExpandMore = styled((props) => {
     const { expand, ...other } = props;
@@ -86,7 +86,7 @@ export function InfoProducto({
             </CardActions>
             <Collapse in={expanded} timeout="auto" unmountOnExit>
               <CardContent>
-                <Typography paragraph>Method:</Typography>
+                {/* <Typography paragraph>Method:</Typography>
                 <Typography paragraph>
                   Heat 1/2 cup of the broth in a pot until simmering, add
                   saffron and set aside for 10 minutes.
@@ -114,7 +114,7 @@ export function InfoProducto({
                 <Typography>
                   Set aside off of the heat to let rest for 10 minutes, and then
                   serve.
-                </Typography>
+                </Typography> */}
               </CardContent>
             </Collapse>
           </Card>
@@ -126,25 +126,37 @@ export function InfoProducto({
               <Typography variant="h4" gutterBottom>
                 Comprar Producto
               </Typography>
-
               <Typography variant="h5" gutterBottom>
                 Stock Disponible: {infoProducto.stock}
               </Typography>
-
-              <IconButton onClick={handleIncrement} aria-label="Incrementar cantidad">
-              <AddIcon />
+              <IconButton
+                onClick={handleIncrement}
+                aria-label="Incrementar cantidad"
+              >
+                <AddIcon />
               </IconButton>
-
               <label htmlFor="">{cantidad}</label>
-              
-              <IconButton onClick={handleDecrement} aria-label="Decrementar cantidad">
-              <RemoveIcon />
+              <IconButton
+                onClick={handleDecrement}
+                aria-label="Decrementar cantidad"
+              >
+                <RemoveIcon />
               </IconButton>
               <br />
-              <Button data-direccion = {infoProducto.usuario.direccion} onClick={handleOpenConfirmacion} variant="contained" color="success">
-                COMPRAR
-              </Button>
-
+              {infoProducto.stock !== 0 ? (
+                <Button
+                  data-direccion={infoProducto.usuario.direccion}
+                  onClick={handleOpenConfirmacion}
+                  variant="contained"
+                  color="success"
+                >
+                  COMPRAR
+                </Button>
+              ) : (
+                <Typography variant="subtitle1" gutterBottom>
+                  No hay unidades de este producto disponibles
+                </Typography>
+              )}
             </>
           ) : (
             ""

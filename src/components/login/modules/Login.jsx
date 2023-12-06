@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLogin } from '../../../context';
 import { Button, TextField, Typography, Container, CssBaseline } from '@mui/material';
 import { styled } from '@mui/system';
@@ -54,12 +54,12 @@ const Login = ({handleIrHome}) => {
   const handlePasswordChange = (event) => {
     setPassword(event.target.value);
   };
-
+  let user_response = "";
   const handleSubmit = async (event) => {
     event.preventDefault();
     
     const user_data = { email, contrasena: password }
-    const user_response = await getLogin(user_data);
+     user_response = await getLogin(user_data);
 
     console.log(user_response);
     login(user_response.data)
@@ -70,6 +70,11 @@ const Login = ({handleIrHome}) => {
     }
     
   };
+  useEffect(() => {
+    if(usuario && usuario!=="" && usuario!== undefined && user_response.success!==false){
+      handleIrHome();
+  }
+  }, [usuario])
 
   return (
     <MyContainer component="main" maxWidth="xs">

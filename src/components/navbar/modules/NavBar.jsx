@@ -1,3 +1,4 @@
+import * as React from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -21,6 +22,13 @@ import InfoProductoIndex from "../../info-producto";
 import GestionProductoIndex from "../../gestion-productos";
 import Login from "../../info-producto";
 import { LoginController } from "../../login/controllers/LoginController";
+import Stack from "@mui/material/Stack";
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
+
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 
 export function NavBar({
   handleOpenNavMenu,
@@ -32,7 +40,11 @@ export function NavBar({
   pages,
   settings,
   handleIrGestionProducto,
+  handleClick,
+  open,
+  handleClose,
 }) {
+
   const Search = styled("div")(({ theme }) => ({
     position: "relative",
     borderRadius: theme.shape.borderRadius,
@@ -126,9 +138,11 @@ export function NavBar({
                 }}
               >
                 {pages.map((page) => (
-                  
-                  <MenuItem data-name={page} key={page} onClick={handleCloseNavMenu}>
-                    
+                  <MenuItem
+                    data-name={page}
+                    key={page}
+                    onClick={handleCloseNavMenu}
+                  >
                     <Typography textAlign="center">{page}</Typography>
                   </MenuItem>
                 ))}
@@ -191,7 +205,7 @@ export function NavBar({
                 onClose={handleCloseUserMenu}
               >
                 {settings.map((setting) => (
-                  <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                  <MenuItem data-namesetting={setting} key={setting} onClick={handleCloseUserMenu}>
                     <Typography textAlign="center">{setting}</Typography>
                   </MenuItem>
                 ))}
@@ -212,6 +226,17 @@ export function NavBar({
           </Search>
         </Container>
       </AppBar>
+      <Stack spacing={2} sx={{ width: "100%" }}>
+        <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+          <Alert
+            onClose={handleClose}
+            severity="error"
+            sx={{ width: "100%" }}
+          >
+            No eres un vendedor, actualiza tus datos
+          </Alert>
+        </Snackbar>     
+      </Stack>
     </>
   );
 }
