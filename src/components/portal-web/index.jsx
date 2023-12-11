@@ -1,9 +1,12 @@
 import React from "react";
-import { PortalWeb } from "./modules/PortalWeb";
+import { PortalWebController } from "./controllers/PortalWebController";
+import NavBarIndex from "../navbar";
 
-
-export default function Portal(){
-    return(
-    <PortalWeb></PortalWeb>
-)
+export default function Portal() {
+    return (
+        <>
+            <NavBarIndex></NavBarIndex>
+            <PortalWebController></PortalWebController>
+        </>
+    )
 }
