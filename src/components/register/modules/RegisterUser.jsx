@@ -1,5 +1,3 @@
-import React, { useEffect, useState } from "react";
-import { useLogin } from "../../../context";
 import {
   Button,
   TextField,
@@ -8,7 +6,6 @@ import {
   CssBaseline,
 } from "@mui/material";
 import { styled } from "@mui/system";
-import { getLogin } from "../services/loginService";
 
 const MyContainer = styled(Container)({
   marginTop: "theme.spacing(8)",
@@ -47,62 +44,20 @@ const useStyles = () => {
 const stylesPanelRegister = {
   marginTop: "1rem",
   display: "flex",
-  justifyContent: "space-between"
-}
+  justifyContent: "space-between",
+};
 
-const Login = ({ handleIrHome }) => {
-  const { usuario, login, logout } = useLogin();
+const RegisterUser = () => {
   const classes = useStyles();
-
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
-  const handleEmailChange = (event) => {
-    setEmail(event.target.value);
-  };
-
-  const handlePasswordChange = (event) => {
-    setPassword(event.target.value);
-  };
-  let user_response = "";
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-
-    const user_data = { email, contrasena: password };
-    user_response = await getLogin(user_data);
-
-    console.log(user_response);
-    login(user_response.data);
-    console.log(user_response);
-
-    if (
-      usuario &&
-      usuario !== "" &&
-      usuario !== undefined &&
-      user_response.success !== false
-    ) {
-      handleIrHome();
-    }
-  };
-  useEffect(() => {
-    if (
-      usuario &&
-      usuario !== "" &&
-      usuario !== undefined &&
-      user_response.success !== false
-    ) {
-      handleIrHome();
-    }
-  }, [usuario]);
 
   return (
     <MyContainer component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
         <Typography component="h1" variant="h5">
-          Iniciar sesión
+          Registro
         </Typography>
-        <MyForm className={classes.form} onSubmit={handleSubmit}>
+        <MyForm className={classes.form}>
           <TextField
             variant="outlined"
             margin="normal"
@@ -113,8 +68,17 @@ const Login = ({ handleIrHome }) => {
             name="email"
             autoComplete="email"
             autoFocus
-            value={email}
-            onChange={handleEmailChange}
+          />
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            name="name"
+            label="Nombre"
+            type="text"
+            id="name"
+            autoComplete="current-name"
           />
           <TextField
             variant="outlined"
@@ -126,8 +90,6 @@ const Login = ({ handleIrHome }) => {
             type="password"
             id="password"
             autoComplete="current-password"
-            value={password}
-            onChange={handlePasswordChange}
           />
           <MyButton
             type="submit"
@@ -136,15 +98,17 @@ const Login = ({ handleIrHome }) => {
             color="primary"
             className={classes.submit}
           >
-            Iniciar sesión
+            Enviar
           </MyButton>
         </MyForm>
         <section className="panel-register" style={stylesPanelRegister}>
           <span>
-            <Typography>¿No tienes cuenta?</Typography>
+            <Typography>¿Ya tienes cuenta?</Typography>
           </span>
           <span>
-            <Typography component="a" href="/register">Registrate</Typography>
+            <Typography component="a" href="/login">
+              Inicia Sesión
+            </Typography>
           </span>
         </section>
       </div>
@@ -152,4 +116,4 @@ const Login = ({ handleIrHome }) => {
   );
 };
 
-export default Login;
+export default RegisterUser;
