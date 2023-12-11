@@ -4,6 +4,9 @@ import {
   Typography,
   Container,
   CssBaseline,
+  FormGroup,
+  FormControlLabel,
+  Switch,
 } from "@mui/material";
 import { styled } from "@mui/system";
 
@@ -47,7 +50,7 @@ const stylesPanelRegister = {
   justifyContent: "space-between",
 };
 
-const RegisterUser = () => {
+const RegisterUser = ({ handleInputChange, handleSubmit, handleInputChangeSwitch }) => {
   const classes = useStyles();
 
   return (
@@ -57,7 +60,7 @@ const RegisterUser = () => {
         <Typography component="h1" variant="h5">
           Registro
         </Typography>
-        <MyForm className={classes.form}>
+        <MyForm className={classes.form} onSubmit={handleSubmit}>
           <TextField
             variant="outlined"
             margin="normal"
@@ -68,29 +71,52 @@ const RegisterUser = () => {
             name="email"
             autoComplete="email"
             autoFocus
+            onChange={handleInputChange}
           />
           <TextField
             variant="outlined"
             margin="normal"
             required
             fullWidth
-            name="name"
+            name="nombre"
             label="Nombre"
             type="text"
             id="name"
             autoComplete="current-name"
+            onChange={handleInputChange}
           />
           <TextField
             variant="outlined"
             margin="normal"
             required
             fullWidth
-            name="password"
+            name="contrasena"
             label="Contraseña"
             type="password"
             id="password"
             autoComplete="current-password"
+            onChange={handleInputChange}
           />
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            name="direccion"
+            label="Dirección"
+            type="text"
+            id="direccion"
+            autoComplete="current-name"
+            onChange={handleInputChange}
+          />
+          <FormGroup>
+            <FormControlLabel
+              control={<Switch />}
+              label="Quieres privilegios de vendedor?"
+              name="esVendedor"
+              onChange={handleInputChangeSwitch}
+            />
+          </FormGroup>
           <MyButton
             type="submit"
             fullWidth

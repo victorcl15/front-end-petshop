@@ -28,6 +28,7 @@ export function GestionProductoController() {
   const [isFormModified, setIsFormModified] = useState(false);
   const requestProductosPorUsuario = async (id) => {
     const arrayProductos = await getProductosPorUsuario(id);
+    console.log(arrayProductos);
     //console.log(arrayProductos);
     setProductosUsuario(arrayProductos);
   };
